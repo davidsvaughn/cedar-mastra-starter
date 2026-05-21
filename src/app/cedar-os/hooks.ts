@@ -15,8 +15,11 @@ export function useCedarRoadmap(
   setEdges: React.Dispatch<React.SetStateAction<Edge[]>>,
 ) {
   useRoadmapState(nodes, setNodes, edges, setEdges);
+}
 
+export function RoadmapAgentSubscriptions() {
   useRoadmapMentions();
-
   useRoadmapContext();
+
+  return null;
 }

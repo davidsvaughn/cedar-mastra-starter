@@ -15,7 +15,7 @@ import ReactFlow, {
 import 'reactflow/dist/style.css';
 
 import { roadmapNodeTypes } from './RoadmapNode';
-import { useCedarRoadmap } from '@/app/cedar-os/hooks';
+import { RoadmapAgentSubscriptions, useCedarRoadmap } from '@/app/cedar-os/hooks';
 import { useRoadmapData } from './useRoadmapData';
 import { useCedarState } from 'cedar-os';
 import { FeatureNodeData } from '@/components/react-flow/FeatureNode';
@@ -29,8 +29,13 @@ export function RoadmapCanvas() {
     initialValue: [],
     description: 'Selected features in the roadmap',
   });
+  const [stateRegistered, setStateRegistered] = React.useState(false);
 
   useCedarRoadmap(nodes, setNodes, edges, setEdges);
+
+  React.useEffect(() => {
+    setStateRegistered(true);
+  }, []);
 
   useOnSelectionChange({
     onChange: ({ nodes }) => {
@@ -76,6 +81,8 @@ export function RoadmapCanvas() {
 
   return (
     <div className="h-full w-full">
+      {stateRegistered && <RoadmapAgentSubscriptions />}
+
       <ReactFlow
         nodes={nodes}
         edges={edges}
