@@ -14,6 +14,7 @@ interface Container3DButtonProps
 	color?: string;
 	childClassName?: string;
 	motionProps?: HTMLMotionProps<'button'>;
+	withMotion?: boolean;
 }
 
 const Container3DButton: React.FC<Container3DButtonProps> = ({
@@ -24,6 +25,7 @@ const Container3DButton: React.FC<Container3DButtonProps> = ({
 	style,
 	color,
 	type = 'button',
+	withMotion = true,
 	...props
 }) => {
 	const { styling } = useStyling();
@@ -74,7 +76,7 @@ const Container3DButton: React.FC<Container3DButtonProps> = ({
 				...textStyle,
 				...style,
 			}}
-			{...motionProps}
+			{...(withMotion ? motionProps : {})}
 			{...props}>
 			<div className={childClassName}>{children}</div>
 		</motion.button>
